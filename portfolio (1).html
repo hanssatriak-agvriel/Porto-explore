@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Manager Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #d4af37;
+            --background: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text);
+            background: white;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .highlights {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-item {
+            flex: 1;
+        }
+
+        .highlight-item strong {
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+
+        .highlight-item p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .experience-item {
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+            border-left: 3px solid var(--secondary);
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .experience-item h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-item .role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .dates {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item ul {
+            margin-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .experience-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--background);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card .category {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .metric .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .metric .label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category li::before {
+            content: '→';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--background);
+            text-align: center;
+            border-radius: 0.75rem;
+            padding: 4rem 2rem;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .highlights {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">PM</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Product Manager & Strategic Leader</h1>
+            <p>Building products that drive growth, engagement, and user satisfaction. Passionate about data-driven decision making and cross-functional collaboration.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#projects" class="btn btn-secondary">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Strategic Product Leader</h3>
+                <p>With 8+ years of experience in product management, I've led cross-functional teams to deliver innovative solutions that impact millions of users. My expertise spans product strategy, user research, analytics, and go-to-market execution.</p>
+                <p>I thrive in fast-paced environments where I can combine data-driven insights with creative problem-solving to unlock new growth opportunities.</p>
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <strong>8+</strong>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>50M+</strong>
+                        <p>Users Impacted</p>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>12</strong>
+                        <p>Products Launched</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: var(--background); padding: 2rem; border-radius: 0.75rem; text-align: center; color: var(--text-light);">
+                <p style="margin-bottom: 1rem;">📊</p>
+                <p>Proven track record in driving product adoption and revenue growth through strategic initiatives and user-centric design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <h4>Senior Product Manager</h4>
+                <div class="role">Company Name / 2022 - Present</div>
+                <div class="dates">Leading mobile app portfolio</div>
+                <ul>
+                    <li>Increased user retention by 35% through personalized engagement features</li>
+                    <li>Led cross-functional team of 15+ engineers and designers</li>
+                    <li>Drove $12M in annual recurring revenue through new monetization strategy</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h4>Product Manager</h4>
+                <div class="role">Previous Company / 2019 - 2022</div>
+                <div class="dates">Managed growth and analytics product line</div>
+                <ul>
+                    <li>Launched 8 major features impacting 5M+ active users</li>
+                    <li>Owned product roadmap and quarterly planning</li>
+                    <li>Reduced churn by 20% through improved onboarding experience</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h4>Associate Product Manager</h4>
+                <div class="role">Startup / 2017 - 2019</div>
+                <div class="dates">Early-stage product development</div>
+                <ul>
+                    <li>Conducted user research and competitive analysis</li>
+                    <li>Supported product launch and market positioning</li>
+                    <li>Analyzed metrics and provided data-driven insights</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <span class="category">Mobile</span>
+                <h3>User Engagement Platform</h3>
+                <p>Designed and launched a personalization engine that increased daily active users by 40% and improved session length by 2.5x.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="value">40%</div>
+                        <div class="label">DAU Increase</div>
+                    </div>
+                    <div class="metric">
+                        <div class="value">2.5x</div>
+                        <div class="label">Session Time</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="category">Analytics</span>
+                <h3>Data Analytics Dashboard</h3>
+                <p>Built comprehensive analytics platform that reduced data analysis time by 60% and enabled real-time decision making.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="value">60%</div>
+                        <div class="label">Time Saved</div>
+                    </div>
+                    <div class="metric">
+                        <div class="value">500+</div>
+                        <div class="label">Users Trained</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="category">Growth</span>
+                <h3>Viral Referral Program</h3>
+                <p>Architected referral system that drove 35% of new user acquisition and achieved 4.2x viral coefficient.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="value">35%</div>
+                        <div class="label">New Users</div>
+                    </div>
+                    <div class="metric">
+                        <div class="value">4.2x</div>
+                        <div class="label">Viral Coeff.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Core Competencies</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Product & Strategy</h3>
+                <ul>
+                    <li>Product Strategy & Roadmap</li>
+                    <li>User Research & Testing</li>
+                    <li>Go-to-Market Strategy</li>
+                    <li>Competitive Analysis</li>
+                    <li>OKRs & KPIs</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>Analytics & Data</h3>
+                <ul>
+                    <li>Data Analysis & Visualization</li>
+                    <li>A/B Testing & Experimentation</li>
+                    <li>SQL & Data Query</li>
+                    <li>Business Intelligence Tools</li>
+                    <li>Growth Metrics & Funnel Analysis</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>Tools & Platforms</h3>
+                <ul>
+                    <li>Figma & Prototyping</li>
+                    <li>Jira & Agile Methodologies</li>
+                    <li>Google Analytics & Mixpanel</li>
+                    <li>Tableau & Power BI</li>
+                    <li>Slack & Communication Tools</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-section">
+            <h2>Let's Connect</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-light);">I'm always interested in discussing new opportunities, innovative ideas, and interesting projects.</p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com">Email</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+            </div>
+            <p style="color: var(--text-light); font-size: 0.95rem;">
+                📧 your.email@example.com | 📱 +1 (555) 123-4567
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Product Manager Portfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
